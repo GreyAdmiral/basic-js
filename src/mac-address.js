@@ -1,4 +1,4 @@
-const {NotImplementedError} = require("../extensions/index.js");
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * The MAC-48 address is six groups of two hexadecimal digits (0 to 9 or A to F),
@@ -15,9 +15,9 @@ const {NotImplementedError} = require("../extensions/index.js");
  *
  */
 function isMAC48Address(mac) {
-	const regExp = /([0-9a-f]{2}\-){5}[0-9a-f]{2}/i;
-	return regExp.test(mac);
+  const regExp = /([0-9a-f]{2}\-){5}[0-9a-f]{2}/i;
+  return regExp.test(mac);
 }
 module.exports = {
-	isMAC48Address,
+  isMAC48Address,
 };

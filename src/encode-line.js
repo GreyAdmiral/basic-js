@@ -1,4 +1,4 @@
-const {NotImplementedError} = require("../extensions/index.js");
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Given a string, return its encoding version.
@@ -11,11 +11,11 @@ const {NotImplementedError} = require("../extensions/index.js");
  *
  */
 function encodeLine(str) {
-	return str.replace(/([\p{L}])\1*/giu, (m) => {
-		return m.length > 1 ? m.length + m[0] : m;
-	});
+  return str.replace(/([\p{L}])\1*/giu, (m) => {
+    return m.length > 1 ? m.length + m[0] : m;
+  });
 }
 
 module.exports = {
-	encodeLine,
+  encodeLine,
 };

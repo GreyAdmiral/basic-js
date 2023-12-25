@@ -1,4 +1,4 @@
-const {NotImplementedError} = require("../extensions/index.js");
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Create transformed array based on the control sequences that original
@@ -14,52 +14,57 @@ const {NotImplementedError} = require("../extensions/index.js");
  *
  */
 function transform(array) {
-	if (!Array.isArray(array)) {
-		throw new Error("'arr' parameter must be an instance of the Array!");
-	}
+  if (!Array.isArray(array)) {
+    throw new Error("'arr' parameter must be an instance of the Array!");
+  }
 
-	const temp = [...array],
-		controls = ["--discard-next", "--discard-prev", "--double-next", "--double-prev"],
-		arrControlls = temp.filter((it) => controls.includes(it));
+  const temp = [...array],
+    controls = [
+      '--discard-next',
+      '--discard-prev',
+      '--double-next',
+      '--double-prev',
+    ],
+    arrControlls = temp.filter((it) => controls.includes(it));
 
-	arrControlls.forEach((it) => {
-		const index = temp.indexOf(it);
+  arrControlls.forEach((it) => {
+    const index = temp.indexOf(it);
 
-		if (~index) {
-			switch (it) {
-				case "--discard-next":
-					if (temp[index + 1]) {
-						temp.splice(index + 1, 1);
-					}
-					break;
-				case "--discard-prev":
-					if (temp[index - 1]) {
-						temp.splice(index - 1, 1);
-					}
-					break;
-				case "--double-next":
-					if (temp[index + 1]) {
-						temp.splice(index + 1, 0, temp[index + 1]);
-					}
-					break;
-				case "--double-prev":
-					if (temp[index - 1]) {
-						temp.splice(index - 1, 0, temp[index - 1]);
-					}
-					break;
-			}
+    if (~index) {
+      switch (it) {
+        case '--discard-next':
+          if (temp[index + 1]) {
+            temp.splice(index + 1, 1);
+          }
+          break;
+        case '--discard-prev':
+          if (temp[index - 1]) {
+            temp.splice(index - 1, 1);
+          }
+          break;
+        case '--double-next':
+          if (temp[index + 1]) {
+            temp.splice(index + 1, 0, temp[index + 1]);
+          }
+          break;
+        case '--double-prev':
+          if (temp[index - 1]) {
+            temp.splice(index - 1, 0, temp[index - 1]);
+          }
+          break;
+      }
 
-			if (controls.includes(temp[temp.indexOf(it) + 1])) {
-				temp.splice(temp.indexOf(it) + 1, 1);
-			}
+      if (controls.includes(temp[temp.indexOf(it) + 1])) {
+        temp.splice(temp.indexOf(it) + 1, 1);
+      }
 
-			temp.splice(temp.indexOf(it), 1);
-		}
-	});
+      temp.splice(temp.indexOf(it), 1);
+    }
+  });
 
-	return temp;
+  return temp;
 }
 
 module.exports = {
-	transform,
+  transform,
 };
