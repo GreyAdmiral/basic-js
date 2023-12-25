@@ -16,25 +16,20 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function renameFiles(arr) {
-  const temp = arr;
+  const names = new Map();
 
-  arr.forEach((it, ind) => {
-    const coincidences = arr.slice(0, ind).filter((el) => el == it);
-
-    if (coincidences.length) {
-      let count = 0,
-        newName = '';
-
-      do {
-        count++;
-        newName = it + `(${count})`;
-      } while (!temp.includes(newName));
-
-      temp[ind] = it + `(${count})`;
+  return arr.map((it) => {
+    if (!names.has(it)) {
+      names.set(it, 1);
+      return it;
+    } else {
+      let nameNumber = names.get(it);
+      newName = it + `(${nameNumber})`;
+      names.set(newName, 1);
+      names.set(it, nameNumber + 1);
+      return newName;
     }
   });
-
-  return temp;
 }
 
 module.exports = {
